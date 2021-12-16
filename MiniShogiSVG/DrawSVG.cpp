@@ -64,11 +64,11 @@ void DrawSVG::drawDanChar(std::ostream& stream, double x, double y) {
 			<< "style=\"font-size: 18px; fill: #000000;\">\n";
 		switch (i)
 		{
-			case 0: stream << u8"一"; break;
-			case 1: stream << u8"二"; break;
-			case 2: stream << u8"三"; break;
-			case 3: stream << u8"四"; break;
-			case 4: stream << u8"五"; break;
+			case 0: stream << (const char*)u8"一"; break;
+			case 1: stream << (const char*)u8"二"; break;
+			case 2: stream << (const char*)u8"三"; break;
+			case 3: stream << (const char*)u8"四"; break;
+			case 4: stream << (const char*)u8"五"; break;
 		}
 		stream << "\n</text>\n";
 	}
@@ -82,11 +82,11 @@ void DrawSVG::drawSujiChar(std::ostream& stream, double x, double y) {
 			<< "style=\"font-size: 18px; fill: #000000;\">\n";
 		switch (i)
 		{
-			case 0: stream << u8"１"; break;
-			case 1: stream << u8"２"; break;
-			case 2: stream << u8"３"; break;
-			case 3: stream << u8"４"; break;
-			case 4: stream << u8"５"; break;
+			case 0: stream << (const char*)u8"１"; break;
+			case 1: stream << (const char*)u8"２"; break;
+			case 2: stream << (const char*)u8"３"; break;
+			case 3: stream << (const char*)u8"４"; break;
+			case 4: stream << (const char*)u8"５"; break;
 		}
 		stream << "\n</text>\n";
 	}
@@ -126,45 +126,45 @@ void DrawSVG::drawCharKoma(std::ostream& stream, Koma koma, double x, double y) 
 	{
 		case Koma::s_Fu:
 		case Koma::g_Fu:
-			stream << u8"歩";
+			stream << (const char*)u8"歩";
 			break;
 		case Koma::s_Gin:
 		case Koma::g_Gin:
-			stream << u8"銀";
+			stream << (const char*)u8"銀";
 			break;
 		case Koma::s_Kaku:
 		case Koma::g_Kaku:
-			stream << u8"角";
+			stream << (const char*)u8"角";
 			break;
 		case Koma::s_Hi:
 		case Koma::g_Hi:
-			stream << u8"飛";
+			stream << (const char*)u8"飛";
 			break;
 		case Koma::s_Kin:
 		case Koma::g_Kin:
-			stream << u8"金";
+			stream << (const char*)u8"金";
 			break;
 		case Koma::s_Ou:
-			stream << u8"王";
+			stream << (const char*)u8"王";
 			break;
 		case Koma::g_Ou:
-			stream << u8"玉";
+			stream << (const char*)u8"玉";
 			break;
 		case Koma::s_nFu:
 		case Koma::g_nFu:
-			stream << u8"と";
+			stream << (const char*)u8"と";
 			break;
 		case Koma::s_nGin:
 		case Koma::g_nGin:
-			stream << u8"全";
+			stream << (const char*)u8"全";
 			break;
 		case Koma::s_nKaku:
 		case Koma::g_nKaku:
-			stream << u8"馬";
+			stream << (const char*)u8"馬";
 			break;
 		case Koma::s_nHi:
 		case Koma::g_nHi:
-			stream << u8"龍";
+			stream << (const char*)u8"龍";
 			break;
 	}
 
@@ -183,7 +183,7 @@ void DrawSVG::drawCharKomadai(std::ostream& stream, const std::array<int, 5>& mo
 			<< "dominant-baseline=\"text-after-edge\" "
 			<< "writing-mode=\"tb\" "
 			<< "style=\"font-size: 22px; fill: #000000;\">\n";
-		stream << u8"☗先手 ";
+		stream << (const char*)u8"☗先手 ";
 	}
 	else {
 		stream << "<text x=\"" << x << "\" y=\"" << y << "\" "
@@ -192,21 +192,21 @@ void DrawSVG::drawCharKomadai(std::ostream& stream, const std::array<int, 5>& mo
 			<< "dominant-baseline=\"text-after-edge\" "
 			<< "writing-mode=\"tb\" "
 			<< "style=\"font-size: 22px; fill: #000000;\">\n";
-		stream << u8"☖後手 ";
+		stream << (const char*)u8"☖後手 ";
 	}
 	bool anykoma = false;
-	if (mochi[0] == 1) { stream << u8"歩"; anykoma = true; }
-	if (mochi[0] == 2) { stream << u8"歩二"; anykoma = true; }
-	if (mochi[1] == 1) { stream << u8"銀"; anykoma = true; }
-	if (mochi[1] == 2) { stream << u8"銀二"; anykoma = true; }
-	if (mochi[4] == 1) { stream << u8"金"; anykoma = true; }
-	if (mochi[4] == 2) { stream << u8"金二"; anykoma = true; }
-	if (mochi[2] == 1) { stream << u8"角"; anykoma = true; }
-	if (mochi[2] == 2) { stream << u8"角二"; anykoma = true; }
-	if (mochi[3] == 1) { stream << u8"飛"; anykoma = true; }
-	if (mochi[3] == 2) { stream << u8"飛二"; anykoma = true; }
+	if (mochi[0] == 1) { stream << (const char*)u8"歩"; anykoma = true; }
+	if (mochi[0] == 2) { stream << (const char*)u8"歩二"; anykoma = true; }
+	if (mochi[1] == 1) { stream << (const char*)u8"銀"; anykoma = true; }
+	if (mochi[1] == 2) { stream << (const char*)u8"銀二"; anykoma = true; }
+	if (mochi[4] == 1) { stream << (const char*)u8"金"; anykoma = true; }
+	if (mochi[4] == 2) { stream << (const char*)u8"金二"; anykoma = true; }
+	if (mochi[2] == 1) { stream << (const char*)u8"角"; anykoma = true; }
+	if (mochi[2] == 2) { stream << (const char*)u8"角二"; anykoma = true; }
+	if (mochi[3] == 1) { stream << (const char*)u8"飛"; anykoma = true; }
+	if (mochi[3] == 2) { stream << (const char*)u8"飛二"; anykoma = true; }
 	if (!anykoma) {
-		stream << u8"持駒なし";
+		stream << (const char*)u8"持駒なし";
 	}
 	stream << "\n</text>\n";
 }

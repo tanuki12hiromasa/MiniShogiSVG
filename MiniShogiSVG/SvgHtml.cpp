@@ -2,7 +2,7 @@
 
 void Html::SvgHtml(const Kyokumen& kyokumen) {
     std::ofstream fs("test.html");
-    fs << u8R"***(<!DOCTYPE html>
+    fs << (const char*)u8R"***(<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -32,7 +32,7 @@ void Html::SvgHtml(const Kyokumen& kyokumen) {
 <div class="image">
   <div class="image__svg">)***";
     DrawSVG::drawKyokumenSVG(fs, kyokumen);
- fs << u8R"***(</div>
+ fs << (const char*)u8R"***(</div>
   <div class="image__sep">
     <div>==&gt;&gt;</div>
     <div><button id="convert-button">変換する</button></div>

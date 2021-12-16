@@ -102,7 +102,7 @@ Move::Move(const std::string& usi) {
 		from_dai = -1;
 	}
 	to.first = usi[2] - '1';
-	to.second = usi[3] - '2';
+	to.second = usi[3] - 'a';
 	prom = (usi[4] == '+');
 }
 

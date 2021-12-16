@@ -18,8 +18,8 @@ int main()
     while (true) {
         std::cout << "input sfen > ";
         std::string line;
-        std::cin >> line;
-        if (line == "q" || line == "quit") return;
+        std::getline(std::cin, line);
+        if (line == "q" || line == "quit") return 0;
         const auto kifu = sfen::SFENtoKifu(line);
         std::string folder = "./svg/" + Util::DateTimeString();
         std::filesystem::create_directories(folder);
