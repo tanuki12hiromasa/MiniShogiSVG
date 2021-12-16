@@ -3,18 +3,32 @@
 
 #include <iostream>
 #include <fstream>
+#include <filesystem>
 #include "kyokumen.h"
+#include "DrawSVG.h"
+#include "SvgHtml.h"
+#include "sfen.h"
 
 int main()
 {
-    //std::cout << "choice mode (history/kyokumen) > ";
-    Kyokumen kyokumen;
+    //Kyokumen kyokumen;
     //kyokumen.s_mochi[0] = 2;
     //kyokumen.g_mochi[3] = 2;
-    std::ofstream fs("test.svg");
-    DrawSVG::head(fs);
-    DrawSVG::drawKyokumen(fs, kyokumen);
-    DrawSVG::tail(fs);
+    //DrawSVG::foutKyokumenSVG("test.svg", kyokumen);
+    while (true) {
+        std::cout << "input sfen > ";
+        std::string line;
+        std::cin >> line;
+        if (line == "q" || line == "quit") return;
+        const auto kifu = sfen::SFENtoKifu(line);
+        std::string folder = "./svg/" + Util::DateTimeString();
+        std::filesystem::create_directories(folder);
+        for (std::size_t i = 0; i < kifu.size(); i++) {
+            const std::string path = (folder + "/" + std::to_string(i) + ".svg");
+            DrawSVG::foutKyokumenSVG(path, kifu[i]);
+        }
+    }
+
 }
 
 // プログラムの実行: Ctrl + F5 または [デバッグ] > [デバッグなしで開始] メニュー

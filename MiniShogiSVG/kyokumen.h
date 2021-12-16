@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <array>
 #include <fstream>
+#include <vector>
 
 enum class Koma {
 	s_Fu, s_Gin, s_Kaku, s_Hi, s_Kin, s_Ou,
@@ -23,6 +24,10 @@ public:
 	static Koma promote(Koma);
 	static int capture(Koma);
 	static Koma summon(bool, int);
+	static Koma usiToKoma(char);
+	static int usiToMochiNum(char);
+	static std::vector<std::string> Split(const std::string& text, char splitter = ' ');
+	static std::string DateTimeString();
 };
 
 using Vec2 = std::pair<int, int>;
@@ -39,10 +44,12 @@ public:
 
 class Kyokumen {
 public:
-	static Kyokumen getStartpos(const std::string& sfen);
-	static Kyokumen getLastpos(const std::string& sfen);
+	static Kyokumen emptyKyokumen();
 public:
 	Kyokumen();
+	Kyokumen(const std::array<std::array<Koma, 5>, 5>& bammen, 
+		const std::array<int, 5>& s_mochi, const std::array<int, 5>& g_mochi, bool teban);
+	Kyokumen(std::vector<std::string>::const_iterator begin, std::vector<std::string>::const_iterator end);
 	void proceed(const Move& move);
 
 	std::array<std::array<Koma, 5>, 5> bammen;
@@ -50,27 +57,4 @@ public:
 	bool teban = true;
 };
 
-class DrawSVG {
-public:
-	static void head(std::ostream& stream);
-	static void tail(std::ostream& stream);
-	static void drawLine(std::ostream& stream, double x1, double y1, double x2,double y2);
-	static void drawRect(std::ostream& stream, double x, double y, double width, double height);
-
-	static void drawKomadai(std::ostream& stream, double x, double y, const std::string& daicolor = "fill=\"rgb(255,242,169)\"");
-	static void drawShogiBan(std::ostream& stream, double x, double y, const std::string& bancolor = "fill=\"rgb(255,242,169)\"");
-	static void drawDanChar(std::ostream& stream, double x, double y);
-	static void drawSujiChar(std::ostream& stream, double x, double y);
-	static void drawCharKoma(std::ostream& stream, Koma koma, double x, double y);
-	static void drawPentKoma(std::ostream& stream, Koma koma, double x, double y);
-	static void drawCharKomadai(std::ostream& stream, const std::array<int, 5>&, bool teban, double x, double y);
-	static void drawGraphicalKomadai(std::ostream& stream, const std::array<int, 5>&, bool teban, double x, double y, const std::string& daicolor = "fill=\"rgb(255,242,169)\"");
-	
-	static void drawKyokumen(std::ostream& stream, const Kyokumen& kyokumen);
-
-	//static constexpr double yohaku = 2;
-	static constexpr double komaWidth = 58;
-	static constexpr double komaHeight = 60;
-
-};
 

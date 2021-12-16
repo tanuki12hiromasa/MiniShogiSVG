@@ -278,3 +278,7 @@ FiveSquareShogi/data/
 FiveSquareShogi/log.txt
 
 FiveSquareShogi/learning/
+
+*.svg
+
+*.html
