@@ -173,7 +173,7 @@ void DrawSVG::drawCharKoma(std::ostream& stream, Koma koma, double x, double y) 
 
 
 
-void DrawSVG::drawCharKomadai(std::ostream& stream, const std::array<int, 5>& mochi, bool teban, double x, double y) {
+void DrawSVG::drawCharKomadai(std::ostream& stream, const std::array<int, 5>& mochi, bool teban, double x, double y, bool myteban) {
 	//☖☗
 
 	if (teban) {
@@ -183,6 +183,7 @@ void DrawSVG::drawCharKomadai(std::ostream& stream, const std::array<int, 5>& mo
 			<< "dominant-baseline=\"text-after-edge\" "
 			<< "writing-mode=\"tb\" "
 			<< "style=\"font-size: 22px; fill: #000000;\">\n";
+		if (myteban) stream << R"(<tspan font-weight="bold">)";
 		stream << (const char*)u8"☗先手 ";
 	}
 	else {
@@ -192,8 +193,10 @@ void DrawSVG::drawCharKomadai(std::ostream& stream, const std::array<int, 5>& mo
 			<< "dominant-baseline=\"text-after-edge\" "
 			<< "writing-mode=\"tb\" "
 			<< "style=\"font-size: 22px; fill: #000000;\">\n";
+		if (myteban) stream << R"(<tspan font-weight="bold">)";
 		stream << (const char*)u8"☖後手 ";
 	}
+	if (myteban) stream << R"(</tspan>)";
 	bool anykoma = false;
 	if (mochi[0] == 1) { stream << (const char*)u8"歩"; anykoma = true; }
 	if (mochi[0] == 2) { stream << (const char*)u8"歩二"; anykoma = true; }
@@ -213,12 +216,12 @@ void DrawSVG::drawCharKomadai(std::ostream& stream, const std::array<int, 5>& mo
 
 void DrawSVG::drawKyokumen(std::ostream& stream, const Kyokumen& kyokumen) {
 	//drawKomadai(stream, 3, 3);
-	drawCharKomadai(stream, kyokumen.g_mochi, false, 3, 20);
+	drawCharKomadai(stream, kyokumen.g_mochi, false, 3, 20, kyokumen.teban == false);
 	drawShogiBan(stream, 40, 25);
 	drawDanChar(stream, komaWidth * 5 + 52, 55);
 	drawSujiChar(stream, 70, 15);
 	//drawKomadai(stream, 9 + komaWidth * 7, 3 + komaHeight );
-	drawCharKomadai(stream, kyokumen.s_mochi, true, 60 + komaWidth * 5 + 5, 25 + komaHeight * 5);
+	drawCharKomadai(stream, kyokumen.s_mochi, true, 60 + komaWidth * 5 + 5, 25 + komaHeight * 5, kyokumen.teban == true);
 	for (int x = 0; x < 5; x++) {
 		for (int y = 0; y < 5; y++) {
 			const auto& k = kyokumen.bammen[x][y];
